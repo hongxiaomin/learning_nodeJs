@@ -53,4 +53,25 @@
 ·console  console.log  console.info  console.error  console.warn  console.time  console.timeEnd
 ·__filename 当前模块的文件绝对路径
 ·__dirname 当前模块的所在的目录的绝对路径
+·setTimeout
+·setImmediate
 ```
+# process对象
+```
+·cwd 当前工作目录
+·chdir process.chdir('..')切换到上级目录
+·memoryUsage 内存使用量
+·nextTick 放在当前任务的末尾
+
+```
+
+# util
+```
+·inherits(child,parent) 继承父类原型上的属性
+·inspect(object[,options])不可枚举
+·isArray 判断一个值是否是数组
+·isRegexp 判断一个值是否是正则
+·isDate 判断一个值是否是日期
+·isError 判断一个值是否是错误
+```
+
