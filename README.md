@@ -141,4 +141,16 @@
 发布项目 npm publish
 
 ```
-
+# gulp 安装
+```
+npm install gulp -g
+npm install gulp
+gulpfile.js
+gulp
+```
+# 模块分类
+```
+·内置模块
+·文件模块
+·第三方模块
+```
