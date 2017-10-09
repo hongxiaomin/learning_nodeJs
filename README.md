@@ -226,3 +226,13 @@ console.log(Math.pow(2,8)-1);
 ·判断是否是Buffer Buffer.isBuffer
 ·获取字节长度 Buffer.byteLength
 ```
+# File
+```
+回掉函数第一个参数永远是ERROR对象
+·读文件
+  异步读取文件 readFile
+  同步读取文件 readFileSync
+·写文件
+  异步写入文件 writeFile
+  同步写入文件 writeFileSync
+```
