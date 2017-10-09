@@ -61,7 +61,7 @@
 ·cwd 当前工作目录
 ·chdir process.chdir('..')切换到上级目录
 ·memoryUsage 内存使用量
-·nextTick 放在当前任务的末尾
+·nextTick 放在当前任务列的末尾
 
 ```
 
@@ -70,8 +70,75 @@
 ·inherits(child,parent) 继承父类原型上的属性
 ·inspect(object[,options])不可枚举
 ·isArray 判断一个值是否是数组
-·isRegexp 判断一个值是否是正则
+·isRegExp 判断一个值是否是正则
 ·isDate 判断一个值是否是日期
 ·isError 判断一个值是否是错误
+```
+# commonjs 规范
+```
+·一个node.js由大量模块组成，每个JS文件都是一个模块
+·实现了require方法，npm基于commonjs实现了自动加载和安装依赖
+```
+# 模块化优点
+```
+·增加内聚性，有助于分工协作
+·方便重构
+·提高代码质量
+```
+# 模块使用
+```
+·定义模块
+·导出模块
+·使用模块
+```
+# require
+```
+·加载模块后会缓存，多次加载后得到同一对象 require('http');
+·查看模块缓存 console.log(require.cache);
+·查询模块绝对路径 require.resolve('./test.js');
+·查看单个模块缓存 require.cache[require.resolve('./test.js')];
+·删除模块缓存 delete require.cache[require.resolve('./test.js')]
+·同步方法
+
+```
+# 包和npm
+```
+·多个模块可以封装成一个包
+·npm是node.js默认的模块管理器，用来安装和管理node模块
+·可以用包的方式通过npm安装、卸载、发布包
+```
+# 组织和管理模块
+```
+放置多个模块的文件夹称为包，可以通过包来对一组具有相互依赖的有关系模块进行管理。初始化一个项目 npm init
+{
+  "name": "learning_nodejs",包的名称
+  "version": "1.0.0",版本号
+  "description": "node description",包的简要说明
+  "main": "index.js",入口文件
+  "scripts": {执行命令
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {仓库地址
+    "type": "git",
+    "url": "git+https://github.com/hongxiaomin/learning_nodeJs.git"
+  },
+  "author": "",作者
+  "license": "ISC",许可证
+  "bugs": {
+    "url": "https://github.com/hongxiaomin/learning_nodeJs/issues"
+  },
+  "homepage": "https://github.com/hongxiaomin/learning_nodeJs#readme",
+  "dependencies":"包的依赖，一个关联数组，由包名称和版本组成"
+}
+```
+# 发布全局项目
+```
+创建并进入项目 mkdir hongxiaomin && cd hongxiaomin
+初始化项目 npm init hongxiaomin
+编写命令行工具 app.js
+在package.json中添加 "bin":{"hongxiaomin":"./app.js"}
+注册用户 npm adduser
+发布项目 npm publish
+
 ```
 
