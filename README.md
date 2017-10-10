@@ -235,4 +235,9 @@ console.log(Math.pow(2,8)-1);
 ·写文件
   异步写入文件 writeFile
   同步写入文件 writeFileSync
+·目录操作 参考node/file/path.js
+  创建目录： fs.mkdir(name,callback)  fs.mkdirSync(name)
+  读取目录下所有的文件 fs.readdir(path,callbcak)
+  查看文件目录信息 fs.stat(path,callbcak)
+  判断一个文件是否存在  fs.exists(path.callback) //callback 参数只有一个exists，如果文件存在返回true，不存在则返回false。
 ```
