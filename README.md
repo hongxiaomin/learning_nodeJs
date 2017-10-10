@@ -228,7 +228,7 @@ console.log(Math.pow(2,8)-1);
 ```
 # File
 ```
-回掉函数第一个参数永远是ERROR对象
+回掉函数第一个参数大部分是ERROR对象
 ·读文件
   异步读取文件 readFile
   同步读取文件 readFileSync
@@ -238,6 +238,22 @@ console.log(Math.pow(2,8)-1);
 ·目录操作 参考node/file/path.js
   创建目录： fs.mkdir(name,callback)  fs.mkdirSync(name)
   读取目录下所有的文件 fs.readdir(path,callbcak)
-  查看文件目录信息 fs.stat(path,callbcak)
+  查看文件目录信息 fs.stat(path,callbcak) 判断文件是否是文件 stat.isFile() 判断文件是否是目录 stat.isDirectory()
   判断一个文件是否存在  fs.exists(path.callback) //callback 参数只有一个exists，如果文件存在返回true，不存在则返回false。
+```
+
+# 路径处理
+```
+·join 将多个参数值字符串结合为一个路径字符串
+  const path = require('path');
+  path.join(__dirname,'4.path.js')//G:\node project\learning_nodeJs\node\file\4.path.js
+·resolve 取得绝对路径
+  path.resolve();  console.log(path.resolve('4.path.js'));//G:\node project\learning_nodeJs\node\file\4.path.js
+·basename 获取一个路径中的文件名
+  path.basename(__filename,'.js')//4.path
+·extname 获取文件的扩展名
+  path.extname(__filename)//.js
+·path.sep 操作系统提定的文件分隔符  console.log(path.sep);// \
+·path.delimiter 属性值为系统指定的环境变量路径分隔符 console.log(path.delimiter)// ;
+
 ```

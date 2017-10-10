@@ -4,14 +4,18 @@ const fs = require('fs');
 // fs.mkdir('../text/a/b',(err)=>{
 //     console.log(err);
 // });
-// fs.readdir('../text',(err,files)=>{
-//     console.log(files);
-//     files.forEach((file)=>{
-//         fs.readFile('../text/'+file,{encoding:'utf8'},(err,data)=>{
-//             console.log(data.toString());
-//         })
-//     })
-// })
+fs.readdir('../text',(err,files)=>{
+    console.log(files);
+    files.forEach((file)=>{
+        fs.stat('../text/'+file,(err,stat)=>{
+            if(stat.isFile()){
+                fs.readFile('../text/'+file,{encoding:'utf8'},(err,data)=>{
+                    console.log(data.toString());
+                })
+            }
+        })
+    })
+});
 
 // fs.stat('../text',(err,data)=>{
 //     console.log(data);
