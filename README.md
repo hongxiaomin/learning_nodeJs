@@ -272,3 +272,44 @@ console.log(Math.pow(2,8)-1);
     listeners(event)所有事件处理函数
     listenerCount(emitter,event)获取某个对象指定处理函数
 ```
+# Node.js中的流
+```
+·流的概念
+流是一组有序的，有起点和终点的字节数据传输手段
+不关心文件的整体内容，只关注是否从文件中读到了数据，以及读到数据之后的处理
+流是一个抽象接口，被Node中的很多对象所实现。比如对一个HTTP服务器的请求对象request是一个流，stdout也是一个流
+·stream.Readable可读流
+使用实现了stream.Readable接口的对象来将对象数据取为流数据，在您表明您准备好接受之前，Readable流并不会开始发射数据。
+
+·ReadStream 文件可读流
+fs.createReadStream(path,[options]);
+    path 读取的文件路径
+    options
+      -flags 对文件采取何种操作，默认为‘r'
+      -encoding 指定编码，默认为null
+      -start 用整数表示文件开始读取的字节数的索引位置
+      -end 用整数表示文件结束读取的字节数的索引位置（包括end位置）
+      -highWaterMark 最高水位线，停止从底层资源读取前内部缓冲区最多能存放的字节数。缺省为64kb
+·可读流触发的事件
+    data 绑定一个data事件监听器到会将流切换到流动模式，数据会被尽可能快的读出。
+    end 该事件会在读完数据后被触发
+    error 当数据接收时发生错误时触发
+    setEncoding 指定编码
+    pause 通知对象停止触发data事件
+    resume 通知对象恢复触发data事件
+    pipe 设置管道，将可读流里的内容导入到参数指定的可写流里
+·Writable可写流
+ 使用各种实现stream.Writable接口的对象来将流数据写入到对象中
+ 可写流的方法
+    write 写入数据
+    end 结束写入数据时触发。迫使缓存区中的数据立即写入目标对象，调用后不能再写入。
+·WriteStream
+在fs模块中使用createWriteStream方法创建一个将流数据写入文件中的writeStream对象
+fs.createWriteStream(path,[options]);
+    ·path 读取的文件路径
+    ·options
+        -flags 对文件采取何种操作，默认为‘w'
+        -encoding 指定编码，默认为null
+        -start 用整数表示文件开始自结束的写入位置
+        -highWaterMark 最高水位线，write()开始返回false的缓冲大小，缺省为16kb
+```
