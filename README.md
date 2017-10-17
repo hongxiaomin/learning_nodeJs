@@ -298,6 +298,8 @@ fs.createReadStream(path,[options]);
     pause 通知对象停止触发data事件
     resume 通知对象恢复触发data事件
     pipe 设置管道，将可读流里的内容导入到参数指定的可写流里
+
+
 ·Writable可写流
  使用各种实现stream.Writable接口的对象来将流数据写入到对象中
  可写流的方法
@@ -306,10 +308,51 @@ fs.createReadStream(path,[options]);
 ·WriteStream
 在fs模块中使用createWriteStream方法创建一个将流数据写入文件中的writeStream对象
 fs.createWriteStream(path,[options]);
-    ·path 读取的文件路径
+    ·path 写的文件路径
     ·options
         -flags 对文件采取何种操作，默认为‘w'
         -encoding 指定编码，默认为null
         -start 用整数表示文件开始自结束的写入位置
         -highWaterMark 最高水位线，write()开始返回false的缓冲大小，缺省为16kb
+
+write方法
+writable.write(chunk,[encoding],[callback]);
+    ·参数
+        -chunk 要写入的数据，Buffer或字符串对象，必须指定
+        -encoding 写入编码，chunk为字符串时有用，可选
+        -callback 写入成功后的回调
+    ·返回值为布尔值，系统缓存区定满时为false，未满时为true
+end方法
+在写入文件时，当不再需要写入数据时可调用该方法关闭文件。迫使系统缓存区的数据立即写入文件中。
+writable.end(chunk,[encoding],[callback]);
+
+pipe readStream.pipe(writeStream,[options]);
+```
+
+# 服务器
+```
+·服务器可以使专业服务器也可以是个人电脑
+·能在特定（IP）服务器的特定端口上监听客户端的请求，并根据请求的路径返回相应结果都叫服务器；
+```
+# 客户端
+```
+·只要能向特定（IP）服务器的特定端口发起请求并接受响应的都叫客户端
+```
+
+# 数据在服务器和客户端之间传递
+```
+·可以把服务器硬盘上已经有的静态文件发送给客户端
+·也可以有服务器经过逻辑处理生成的动态内容返回给客户端，比如当前时间
+·一个http事务由一条（从客户端发往服务器的）请求命令和一个（从服务器发回客户端的）响应结果组成
+```
+
+# Express
+```
+路由控制
+·get方法 -- 根据请求路径来处理客户端发出的GET请求
+app.get(path,function(request,response));
+·app.all()函数可以匹配所有的HTTP动词，也就是说它可以匹配所有路径的请求。
+
+中间件
+·中间件就是处理HTTP请求的函数，用来完成各种特定的任务，比如检查用户是否登录、添加公共方法。
 ```
