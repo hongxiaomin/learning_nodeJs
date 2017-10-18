@@ -345,7 +345,99 @@ pipe readStream.pipe(writeStream,[options]);
 ·也可以有服务器经过逻辑处理生成的动态内容返回给客户端，比如当前时间
 ·一个http事务由一条（从客户端发往服务器的）请求命令和一个（从服务器发回客户端的）响应结果组成
 ```
+# ajax 四步曲
+```
+第一步 创建ajax对象
+var XHR = new XMLHTTPRequest();
 
+第二步 打开请求
+xhr.open(method,url,async,user,password);
+参数解析
+    -method http方法，
+    -url 请求的URL地址，可以为绝对地址也可以为相对地址
+    -async 布尔值，指定此请求是否为异步方式，默认为true。
+    -user 如果服务器需要验证，此处指定用户名，默认为undefined
+    -password 验证信息中的密码部分，默认是undefined
+
+第三步 指定接受响应的回调函数
+当XMLHTTPRequest对象的readyState属性改变时调用回调函数
+xhr.onreadystatechange=function(){}
+readyState状态的值
+    0（未初始化）对象已建立，但是尚未初始化
+    1（初始化）对象已建立，尚未调用send方法
+    2（发送数据）send方法已调用，但是当前的状态及HTTP头未知
+    3（数据传送中）已接收部分数据，因为响应及HTTP头不全，这时通过responseBody和responseText获取部分数据会出现错误
+    4（完成）数据接收完毕，此时可以通过responseBody和responseText获取完整的回应数据
+
+第四部 发送请求 xhr.send();
+    send方法会把参数放到请求体里
+    所有get系不能传参数，而post可能需要
+    当使用同步的时候，send方法后都会阻塞，一直等到服务器响应，所以send方法需要放在最后。
+    xhr.abort()//失败时强行退出
+    xhr 对象的属性
+        -onreadystatechange 一个当readyState属性改变时会调用的回调函数对象
+        -response  响应内容，响应实体类型由responseType指定
+        -responseType 修改响应类型
+        -responseText 响应为文本
+        -status  响应状态码
+        -statusText  响应状态码 描述信息
+jQuery的ajax请求
+    $.ajax({
+        method:'get',//请求的方法
+        url:'/ajax',//请求的url
+        data:{name:"hxm"},//发送的数据
+        processData:true,//是否处理数据，是否把对象转成查询字符串
+        dataType:'json',//返回的数据类型
+        cache:false,//是否缓存
+        async:true,//是否异步
+        username:'hxm',//用户名
+        password:'123456',//密码
+        timeout:0,//超时毫秒数
+        headers:{name:'hot'},//自定义头
+        context:document.querySelector('#content'),//上下文 success error 执行时中的this指向
+    })
+```
+# URL
+```
+let url=require('url');
+console.log(url.parse('https://hxm:123@www.jetbrains.com/webstorm/download/download-thanks.html?platform=windows&username=111',true));
+
+Url {
+    protocol: 'https:',协议
+    slashes: true,
+    auth: 'hxm:123',权限
+    host: 'www.jetbrains.com',主机
+    port: null,端口
+    hostname: 'www.jetbrains.com',主机名
+    hash: null,哈希值
+    search: '?platform=windows',查询字符串
+    query: 'platform=windows',查询条件
+    query: { platform: 'windows', username: '111' },如果方法后面加参数true，查询字符串以json格式展示
+    pathname: '/webstorm/download/download-thanks.html',路径 端口号和问号中间那部分
+    path: '/webstorm/download/download-thanks.html?platform=windows',路径+查询字符串
+    href: 'https://www.jetbrains.com/webstorm/download/download-thanks.html?platform=windows' }
+
+let urlObj=url.parse('https://hxm:123@www.jetbrains.com/webstorm/download/download-thanks.html?platform=windows&username=111',true);
+console.log(url.format(urlObj));// https://hxm:123@www.jetbrains.com/webstorm/download/download-thanks.html?platform=windows&username=111
+```
+
+# querystring
+```
+let querystring=require('querystring');
+let input='username=hxm&password=123';
+let input2='username==hxm@password==123';
+console.log(querystring.parse(input));//{ username: 'hxm', password: '123' }
+console.log(querystring.parse(input2,'@','=='));//{ username: 'hxm', password: '123' }
+let inputObj={ username: 'hxm', password: '123' };
+console.log(querystring.stringify(inputObj));//username=hxm&password=123
+console.log(querystring.stringify(inputObj,'@','=='));//username==hxm@password==123
+```
+# form 标签的enctype属性
+```
+application/x-www-form-urlencoded  在发送前编码所有字符（默认）
+multipart/form-data  不对字符编码，在使用包含文件上传控件的表单时，必须使用该值
+text/plain 空格转换为'+'加号，但不对特殊字符编码。
+```
 # Express
 ```
 路由控制
