@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="keyword" onkeyup="search()">
+<ul id="list"></ul>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    function search(){
+        var value = document.getElementById('keyword').value;
+        var qsData={'wd':value,'cb':'getData'};
+        $.ajax({
+            async:true,
+            url:'http://suggestion.baidu.com/su',
+            type:'get',
+            dataType:'jsonp',
+            jsonp:'jsoncallback',
+            data:qsData,
+            timeout:5000,
+        })
+    }
+    function getData(data){
+        console.log(data);
+        var str="";
+        data.s.forEach(function(item){
+            str+='<li>'+item+'</li>'
+        });
+        document.getElementById('list').innerHTML=str;
+    }
+
+</script>

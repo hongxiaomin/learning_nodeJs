@@ -438,6 +438,22 @@ application/x-www-form-urlencoded  在发送前编码所有字符（默认）
 multipart/form-data  不对字符编码，在使用包含文件上传控件的表单时，必须使用该值
 text/plain 空格转换为'+'加号，但不对特殊字符编码。
 ```
+
+# JSONP
+```
+·同源策略
+    同源策略就是规定了JavaScript可以操作那些web内容的一个完整的安全限制。
+    什么是同源？
+        同源就是规定多个web资源的url中scheme（协议）、hostname(域名或IP)、port（端口）必须相同，只要有一项不同那么这个web资源就不是同源的。
+    什么是跨域？
+        当请求的资源的url与当前页面的url中的scheme（协议）、hostname(域名或IP)、port（端口）有一个不同的时候就算是跨域操作。
+    JSONP
+        ·script元素可以作为一种ajax传输协议
+        ·只需设置script元素的src属性并且插入到DOM中，浏览器就会发出一个HTTP请求到src属性所指向的URL。
+        ·script不受同源策略的影响
+        ·script元素会自动下载并执行下载的数据
+        ·使用这种script元素来进行ajax数据的传输的技术就叫做JSONP，也就是JSON-Passing。
+```
 # Express
 ```
 路由控制
