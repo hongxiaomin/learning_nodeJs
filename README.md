@@ -345,6 +345,38 @@ pipe readStream.pipe(writeStream,[options]);
 ·也可以有服务器经过逻辑处理生成的动态内容返回给客户端，比如当前时间
 ·一个http事务由一条（从客户端发往服务器的）请求命令和一个（从服务器发回客户端的）响应结果组成
 ```
+# http服务器
+```
+创建服务器并指定监听请求处理函数
+http.createServer(requestListener(request,response))
+·request 客户端请求 http.IncomingMessage
+服务器监听
+server.listen(port,[host],[backlog],[callback])
+    -port 端口
+    -host 主机
+    -backlog 等待中的队列数量，默认值是511
+    -callback 请求到来的时候服务器调用的回调函数
+http接收客户端数据
+    http接收客户端请求的第一个参数为http.IncomingMessage对象，有如下的属性：
+        -method 客户端请求的方法
+        -url 请求时使用的url参数字符串
+        -headers 请求头对象，包括客户端所有请求头信息，包括cookie
+        -httpVersion Http版本
+创建http客户端
+    request方法可以向其他网站请求数据
+    var req=http.request(options,callback)//req 表示http.ClientRequest 对象，代表客户端请求
+        ·options
+            -host 域名或目标主机IP
+            -hostname 域名或目标主机IP，优先级比host高
+            -port 端口号
+            -method 请求方法
+            -path 请求的路径，默认为/
+            -headers 客户端请求头对象
+            -auth 认证信息
+        ·callback=function(response){}当获取到目标网站所返回的响应流时调用的回调函数
+            -response是一个http.IncomingMessage 对象，可以从中读取响应流数据
+
+```
 # ajax 四步曲
 ```
 第一步 创建ajax对象
@@ -454,6 +486,24 @@ text/plain 空格转换为'+'加号，但不对特殊字符编码。
         ·script元素会自动下载并执行下载的数据
         ·使用这种script元素来进行ajax数据的传输的技术就叫做JSONP，也就是JSON-Passing。
 ```
+# 设置响应头
+```
+·当浏览器使用跨域资源共享时，服务器都必须在响应头中设置Access-Control-Allow-Origin
+    response.writeHead(200,{"Access-Control-Allow-Origin":"*})
+·其中*代码允许任何源请求本服务器，也可以改成固定的源，例如：{"Access-Control-Allow-Origin":"http://localhost:9090"}
+·只允url为http://localhost:9090请求源请求本服务器。
+```
+# 什么是前后端分离
+```
+    前端：负责View和Controller层
+    后端：只负责Model层，业务和数据处理等。
+```
+# curl
+```
+git bash中执行curl -v http://localhost:8080
+curl是一个获取服务器资源的Linux命令
+```
+
 # Express
 ```
 路由控制
