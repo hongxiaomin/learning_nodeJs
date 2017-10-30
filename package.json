@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hongxiaomin/learning_nodeJs/issues"
   },
-  "homepage": "https://github.com/hongxiaomin/learning_nodeJs#readme"
+  "homepage": "https://github.com/hongxiaomin/learning_nodeJs#readme",
+  "dependencies": {
+    "nimble": "0.0.2"
+  }
 }
